@@ -3,20 +3,31 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:1962@localhost/quotes'
-app.config[ 'SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] ='postgresql+psycopg2://postgres:1962@localhost/events'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
+
+db = SQLAlchemy(app)
+
+class Todo(db.Model):
+	id = db.Column(db.Integer,primary_key=True)
+	date = db.Column(db.String(30))
+	event = db.Column(db.String(2000))
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    result = Todo.query.all()
+    return render_template('index.html', result=result)
 
-@app.route('/quotes')
-def quotes():
-    return render_template('quotes.html')
+@app.route('/events')
+def events():
+    return render_template('events.html')
 
 
 @app.route('/process',methods = ['POST'])
 def process():
-    author = request.form[ 'author']
-    quote = request.form['quote']
-    return redirect(url_for('index.html'))
+    date = request.form[ 'date']
+    event = request.form['event']
+    eventdata = Todo(date=date,event=event)
+    db.session.add(eventdata)
+    db.session.commit()
+    return redirect(url_for('index'))
