@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Welcome to Pet Diary</title>
+    <title>Vaccination record</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" >
@@ -13,8 +13,9 @@
 
   <body>
     <nav style="margin-top:25px;margin-left:45px">
-      <a class="btn btn-primary" href="{{ url_for('profile') }}">Add pet details</a>
-      <a class="btn btn-primary" href="{{ url_for('vaccination') }}">Vaccination record</a>
+      <a class="btn btn-primary" href="{{ url_for('index') }}">Pet Details</a>
+      <a class="btn btn-primary" href="{{ url_for('vaccine') }}">Add vaccination details</a>
+      
 
     </nav>
     <br>
@@ -22,15 +23,15 @@
     <div class="container theme-showcase" role="main">
 
       <div style="color:#fff; background-color:rgb(18, 49, 117)", class="jumbotron">
-        <h1>Pet details</h1>
+        <h1>Vaccination record</h1>
       </div>
       <!--for loop starts-->
       {% for r in result %}
       <div style ="color:#fff;background-color:blue">
-        <h1> {{ r.pet_name }} </h1>
+        <h3> Vaccine: {{ r.vaccine }} </h3>
       </div>
        <div style ="color:#fff;font-size:28px;background-color:green">
-        <p> {{ r.pet_breed }} </p>
+        <p> Date: {{ r.date }} </p>
       </div>
 
       {% endfor %}

@@ -3,31 +3,54 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] ='postgresql+psycopg2://postgres:1962@localhost/events'
+app.config['SQLALCHEMY_DATABASE_URI'] ='postgresql+psycopg2://postgres:1962@localhost/diary'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
 
 db = SQLAlchemy(app)
 
-class Todo(db.Model):
+class Profile(db.Model):
 	id = db.Column(db.Integer,primary_key=True)
+	pet_name = db.Column(db.String(30))
+	pet_breed = db.Column(db.String(30))
+
+class Vaccine(db.Model):
+	id = db.Column(db.Integer,primary_key=True)
+	vaccine = db.Column(db.String(30))
 	date = db.Column(db.String(30))
-	event = db.Column(db.String(2000))
 
 @app.route('/')
 def index():
-    result = Todo.query.all()
+    result = Profile.query.all()
     return render_template('index.html', result=result)
 
-@app.route('/events')
-def events():
-    return render_template('events.html')
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 
 
 @app.route('/process',methods = ['POST'])
 def process():
-    date = request.form[ 'date']
-    event = request.form['event']
-    eventdata = Todo(date=date,event=event)
-    db.session.add(eventdata)
-    db.session.commit()
-    return redirect(url_for('index'))
+	pet_name = request.form['pet_name']
+	pet_breed = request.form['pet_breed']
+	diarydata =Profile(pet_name=pet_name,pet_breed=pet_breed)
+	db.session.add(diarydata)
+	db.session.commit()
+	return redirect(url_for('index'))
+
+@app.route('/vaccination/vprocess',methods = ['POST'])
+def vprocess():
+	vaccine = request.form['vaccine']
+	date = request.form['date']
+	diarydata =Vaccine(vaccine=vaccine,date=date)
+	db.session.add(diarydata)
+	db.session.commit()
+	return redirect(url_for('vaccination'))
+
+@app.route('/vaccination/vaccine')
+def vaccine():
+   return render_template('vaccine.html')
+
+@app.route('/vaccination')
+def vaccination():
+    result = Vaccine.query.all()
+    return render_template('vaccination.html', result=result)

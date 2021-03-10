@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Add your pet details</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" >
+
+
+  </head>
+
+  <body>
+    <br>
+    <br>
+
+    <div class="container">
+
+      <form action="/process" method="post">
+        <div class="form-group">
+          <label for="pet_name">Pet Name</label>
+          <input type="text" id="pet_name" name="pet_name" class="form-control" placeholder="Add pet name here.." required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="pet_breed" >Pet Breed</label>
+            <textarea class="form-control" rows="5" id="pet_breed" name="pet_breed" "placeholder=" Add your pet breed here.." required></textarea>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit  Your pet details</button>
+      </form>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
