@@ -12,11 +12,15 @@ class Profile(db.Model):
 	id = db.Column(db.Integer,primary_key=True)
 	pet_name = db.Column(db.String(30))
 	pet_breed = db.Column(db.String(30))
+	pet_dob = db.Column(db.String(30))
+	pet_sex = db.Column(db.String(30))
 
 class Vaccine(db.Model):
 	id = db.Column(db.Integer,primary_key=True)
 	vaccine = db.Column(db.String(30))
 	date = db.Column(db.String(30))
+	next_due = db.Column(db.String(30))
+	
 
 @app.route('/')
 def index():
@@ -32,7 +36,9 @@ def profile():
 def process():
 	pet_name = request.form['pet_name']
 	pet_breed = request.form['pet_breed']
-	diarydata =Profile(pet_name=pet_name,pet_breed=pet_breed)
+	pet_dob = request.form['pet_dob']
+	pet_sex = request.form['pet_sex']
+	diarydata =Profile(pet_name=pet_name,pet_breed=pet_breed, pet_dob=pet_dob,pet_sex=pet_sex)
 	db.session.add(diarydata)
 	db.session.commit()
 	return redirect(url_for('index'))
@@ -41,7 +47,8 @@ def process():
 def vprocess():
 	vaccine = request.form['vaccine']
 	date = request.form['date']
-	diarydata =Vaccine(vaccine=vaccine,date=date)
+	next_due = request.form['next_due']
+	diarydata =Vaccine(vaccine=vaccine,date=date,next_due=next_due)
 	db.session.add(diarydata)
 	db.session.commit()
 	return redirect(url_for('vaccination'))

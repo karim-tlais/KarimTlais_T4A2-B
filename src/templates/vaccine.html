@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Add your list</title>
+    <title>Add your vaccination records</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" >
@@ -25,7 +25,11 @@
         </div>
         <div class="form-group">
           <label for="date" >Date</label>
-            <textarea class="form-control" rows="5" id="date" name="date" "placeholder="Add your vaccination date here.." required></textarea>
+          <input type="text" id="inputdate" name="date" class="form-control" placeholder="Add vaccination date here.." required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="next_due" >next due date</label>
+          <input type="text" id="inputnextdue" name="next_due" class="form-control" placeholder="Add next due date here.." required autofocus>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit  Your Vaccine</button>
       </form>
