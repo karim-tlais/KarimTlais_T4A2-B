@@ -13,8 +13,8 @@
 
   <body>
     <nav style="margin-top:25px;margin-left:150px">
-      <a class="btn btn-primary" href="{{ url_for('vaccination') }}">Vaccination record</a>
-      <a class="btn btn-primary" href="{{ url_for('logout') }}">Log Out</a>
+      <a class="btn btn-primary" href="{{ url_for('vaccination.vaccination_route') }}">Vaccination record</a>
+      <a class="btn btn-primary" href="{{ url_for('logout.logout_route') }}">Log Out</a>
     </nav>
     <br>
 
@@ -25,22 +25,11 @@
       </div>
 
       <nav style="margin-top:25px;margin-bottom:45px">
-        <a class="btn btn-primary" href="{{ url_for('profile') }}">Add pet details</a>
+        <a class="btn btn-primary" href="{{ url_for('profile.profile_add') }}">Add pet details</a>
       </nav>  
       <!--for loop starts-->
       {% for r in result %}
-      <!-- <div style ="color:#fff;background-color:blue">
-        <h1> Pet name: {{r.pet_name }} </h1>
-      </div>
-       <div style ="color:#fff;font-size:28px;background-color:green">
-        <p> Pet breed: {{r.pet_breed }} </p>
-      </div>
-      <div style ="color:#fff;font-size:28px;background-color:green">
-        <p> Pet DOB: {{r.pet_dob }} </p>
-      </div>
-      <div style ="color:#fff;font-size:28px;background-color:green">
-        <p> Pet sex:  {{r.pet_sex }} </p>
-      </div> -->
+
       <table style="width:100%" border="1">
         <tr>
           <th>Pet Name:</th>
